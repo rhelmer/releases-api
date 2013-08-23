@@ -10,7 +10,7 @@ import datetime
 import logging
 
 logging.basicConfig()
-logger = logging.getLogger()
+logger = logging.getLogger('scraper')
 logger.setLevel(logging.DEBUG)
 
 """
@@ -218,8 +218,6 @@ class Scraper():
         prod_url = urljoin(base_url, product_name, '')
         # releases are sometimes in nightly, sometimes in candidates dir.
         # look in both.
-        logger = logging.getLogger('scraper')
-        logger.setLevel(logging.DEBUG)
         for directory in ('nightly', 'candidates'):
             if not getLinks(prod_url, startswith=directory):
                 logger.debug('Dir %s not found for %s',
