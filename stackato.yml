@@ -1,0 +1,7 @@
+name: releases
+ignores: ['env', '.git']
+framework:
+  type: python
+  runtime: python27
+processes:
+  web: python web.py
