@@ -1,0 +1,2 @@
+configman==1.1.7
+lxml==2.3.4
