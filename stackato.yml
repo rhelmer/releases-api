@@ -5,3 +5,5 @@ framework:
   runtime: python27
 processes:
   web: python web.py
+cron:
+  - '*/5 * * * * ./scraper.py > static/releases.json'

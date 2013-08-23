@@ -188,7 +188,7 @@ def getB2G(dirname, url, backfill_date=None, logger=None):
 
 
 #==============================================================================
-products = ['firefox', 'mobile', 'thunderbird', 'seamonkey', 'b2g']
+products = ['b2g', 'firefox', 'mobile', 'thunderbird', 'seamonkey']
 base_url = 'http://ftp.mozilla.org/pub/mozilla.org'
 
 class Scraper():
@@ -204,7 +204,9 @@ class Scraper():
             logger.debug('scraping %s releases for date %s',
                 product_name, date)
             if product_name == 'b2g':
-                results['nightly'].append(self.scrapeB2G(product_name, date))
+                # FIXME seems to have moved
+                continue
+                #results['nightly'].append(self.scrapeB2G(product_name, date))
             else:
                 results['releases'].append(self.scrapeReleases(product_name))
                 results['nightly'].append(
@@ -283,6 +285,7 @@ class Scraper():
                         'build_type': build_type,
                         'repository': repository,
                     })
+        return results
 
     def scrapeB2G(self, product_name, date):
         results = {product_name: []}
