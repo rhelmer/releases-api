@@ -9,7 +9,8 @@ import sys
 import datetime
 import logging
 
-logger = logging.getLogger("scrape")
+logging.basicConfig()
+logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 """
