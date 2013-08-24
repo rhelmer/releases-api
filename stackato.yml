@@ -6,4 +6,4 @@ framework:
 processes:
   web: python web.py
 cron:
-  - '*/5 * * * * ./scraper.py > static/releases.json'
+  - '*/5 * * * * ./scraper.py > static/releases-new.json && mv static/releases-new.json static/releases.json'
