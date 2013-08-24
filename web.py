@@ -7,9 +7,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    with open('static/releases.json') as f:
-        contents = f.read()
-    return Response(response=contents, mimetype='application/json')
+    try:
+        with open('static/releases.json') as f:
+            contents = f.read()
+        return Response(response=contents, mimetype='application/json')
+    except IOError:
+        return Response('No results (yet)')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
