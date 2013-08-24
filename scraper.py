@@ -269,7 +269,11 @@ class Scraper():
                 build_type = 'Nightly'
                 if version.endswith('a2'):
                     build_type = 'Aurora'
-                repository = kvpairs.get('rev', 'unknown')
+                if kvpairs.get('rev'):
+                    repository = '/'.join(kvpairs['rev'].split('/')[:-2])
+                    revision = kvpairs['rev'].split('/')[-1:][0]
+                else:
+                    repository = revision = None
                 if kvpairs.get('buildID'):
                     build_id = kvpairs['buildID']
                     results[product_name].append({
@@ -278,6 +282,7 @@ class Scraper():
                         'build_id': build_id,
                         'build_type': build_type,
                         'repository': repository,
+                        'revision': revision,
                     })
         return results
 
