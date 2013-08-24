@@ -11,7 +11,7 @@ Install:
 ```
 
 --  
-Run scraper:
+Run scraper (e.g. every 5 minutes from cron or similar):
 ```
  ./scraper.py > static/releases.json
 ```
