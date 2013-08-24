@@ -144,17 +144,10 @@ def getNightly(dirname, url):
             continue
 
         version = pv.split('-')[-1]
-        repository = []
-
-        for field in dirname.split('-'):
-            if not field.isdigit():
-                repository.append(field)
-        repository = '-'.join(repository).strip('/')
-
         info_url = urljoin(nightly_url, f)
         kvpairs, bad_lines = parseInfoFile(info_url, nightly=True)
 
-        yield (platform, repository, version, kvpairs, bad_lines)
+        yield (platform, version, kvpairs, bad_lines)
 
 def getB2G(dirname, url, backfill_date=None, logger=None):
     """
@@ -267,7 +260,7 @@ class Scraper():
         nightlies = getLinks(nightly_url, startswith=dir_prefix)
         for nightly in nightlies:
             for info in getNightly(nightly, nightly_url):
-                platform, repository, version, kvpairs, bad_lines = info
+                platform, version, kvpairs, bad_lines = info
                 for bad_line in bad_lines:
                     logger.warning(
                         "Bad line for %s (%r)",
@@ -276,6 +269,7 @@ class Scraper():
                 build_type = 'Nightly'
                 if version.endswith('a2'):
                     build_type = 'Aurora'
+                repository = kvpairs.get('rev', 'unknown')
                 if kvpairs.get('buildID'):
                     build_id = kvpairs['buildID']
                     results[product_name].append({
