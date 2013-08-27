@@ -1,5 +1,5 @@
 name: releases
-ignores: ['env', '.git']
+ignores: ['env', '.git', 'vendor']
 framework:
   type: python
   runtime: python27
