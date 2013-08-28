@@ -1,3 +1,4 @@
 env/
 static/releases.json
 static/releases-new.json
+*.pyc
