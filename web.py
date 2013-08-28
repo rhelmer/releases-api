@@ -2,6 +2,7 @@
 
 import os
 import simplejson
+import logging
 from flask import Flask, Response, render_template
 app = Flask(__name__)
 
@@ -17,7 +18,8 @@ def releases():
             contents = f.read()
         return Response(response=contents, mimetype='application/json')
     except IOError, e:
-        return Response('No results (yet) %s' % e)
+        logging.error('Unable to open releases.json: %s' % e)
+        return Response('No data (yet?)')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
