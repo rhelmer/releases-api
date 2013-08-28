@@ -12,7 +12,8 @@ def index():
 @app.route('/releases')
 def releases():
     try:
-        with open('static/releases.json') as f:
+        staticdir = '%s/static' % os.path.dirname(os.path.abspath(__file__))
+        with open('%s/releases.json' % staticdir) as f:
             contents = f.read()
         return Response(response=contents, mimetype='application/json')
     except IOError, e:
