@@ -197,9 +197,7 @@ class Scraper():
             logger.debug('scraping %s releases for date %s',
                 product_name, date)
             if product_name == 'b2g':
-                # FIXME seems to have moved
-                continue
-                #results['nightly'].append(self.scrapeB2G(product_name, date))
+                results['nightly'].append(self.scrapeB2G(product_name, date))
             else:
                 results['releases'].append(self.scrapeReleases(product_name))
                 results['nightly'].append(
@@ -292,7 +290,7 @@ class Scraper():
         if not product_name == 'b2g':
             return
         b2g_manifests = urljoin(base_url, product_name,
-                            'manifests')
+                            'manifests', 'nightly')
 
         dir_prefix = date.strftime('%Y-%m-%d')
         version_dirs = getLinks(b2g_manifests, startswith='1.')
@@ -314,6 +312,7 @@ class Scraper():
                         'beta_number': kvpairs.get('beta_number', None),
                         'repository': repository,
                     })
+        return results
                         
 
 def main():
