@@ -11,7 +11,7 @@ import logging
 
 logging.basicConfig()
 logger = logging.getLogger('scraper')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.ERROR)
 
 """
  Socket timeout to prevent FTP from hanging indefinitely
