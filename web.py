@@ -15,8 +15,8 @@ def releases():
         with open('static/releases.json') as f:
             contents = f.read()
         return Response(response=contents, mimetype='application/json')
-    except IOError:
-        return Response('No results (yet)')
+    except IOError, e:
+        return Response('No results (yet) %s' % e)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
