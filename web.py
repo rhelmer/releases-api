@@ -3,7 +3,7 @@
 import os
 import simplejson
 import logging
-from flask import Flask, Response, render_template
+from flask import Flask, Response, render_template, make_response
 app = Flask(__name__)
 
 @app.route('/')
@@ -16,7 +16,10 @@ def releases():
         staticdir = '%s/static' % os.path.dirname(os.path.abspath(__file__))
         with open('%s/releases.json' % staticdir) as f:
             contents = f.read()
-        return Response(response=contents, mimetype='application/json')
+        response = make_response(contents)
+        response.headers['Content-Type'] = 'application/json'
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response
     except IOError, e:
         logging.error('Unable to open releases.json: %s' % e)
         return Response('No data (yet?)')
